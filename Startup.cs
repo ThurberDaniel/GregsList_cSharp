@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GregsList.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,6 +29,11 @@ namespace GregsList
         {
 
             services.AddControllers();
+            // NOTE Register Transient Services
+            // Transient Services are used with Dependency Injection for when a Controller needs a service upon construction
+            services.AddTransient<HousesService>();
+            services.AddTransient<JobsService>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "GregsList", Version = "v1" });
